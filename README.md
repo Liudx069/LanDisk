@@ -130,6 +130,10 @@ node tools/e2e/ui-test.mjs --engine webkit                    # 同上，WebKit 
 
 测试结果、实测环境与未测项见 `dist/delivery/` 中的最终报告与 [`docs/TEST_PLAN.md`](docs/TEST_PLAN.md)。
 
+> GitHub Actions 每次提交都会在 Windows runner 上跑构建与测试。其中有五个测试类验证的是「真实局域网地址」
+> 语义（首次连接向导、配对链接顺序、探针信任），托管 runner 只有虚拟网卡，产品按设计把它们排除在外，
+> 因此这五类只在有物理网卡的机器上跑；其余用例在 CI 里全量执行。
+
 ## 已知限制（摘要）
 
 真机 iPhone、物理移动硬盘与可信 HTTPS 未在本机验证（如实记为 `NOT_RUN`）；
