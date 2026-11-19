@@ -1,5 +1,8 @@
 # LanDisk — Windows ↔ iPhone 局域网文件应用
 
+[![CI](https://github.com/Liudx069/LanDisk/actions/workflows/ci.yml/badge.svg)](https://github.com/Liudx069/LanDisk/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 LanDisk 让 iPhone（或任何同一局域网内的浏览器）通过网页访问这台 Windows 电脑上**你明确授权**的
 文件夹和磁盘，完成 **查看、播放、下载、上传、重命名、删除** 六项操作，并提供一套现代文件管理器的
 浏览体验：多列排序、搜索与筛选、最近、收藏、列表/网格、图片缩略图、多选、批量下载 ZIP、批量删除。
