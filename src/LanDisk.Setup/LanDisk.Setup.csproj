@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <!-- The installer's visual layer is WPF/XAML: the progress picture is a vector server rack whose -->
+    <!-- LEDs power on top-to-bottom. WinForms stays for the uninstall dialog only. -->
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>LanDisk.Setup</RootNamespace>
+    <!-- The user's single double-clickable entry point. -->
+    <AssemblyName>LanDisk-Setup</AssemblyName>
+    <Version>1.8.1</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationUseCompatibleTextRendering>false</ApplicationUseCompatibleTextRendering>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- Single file so that "install LanDisk" really is one file the user can be handed. The
+         self-contained/RID switches are passed on the publish command line rather than being pinned
+         here, so that referencing this project from the test assembly stays simple. -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <!-- Enabling WPF swaps the SDK's implicit-using set. With WinForms + WPF together the base
+       namespaces have to be listed explicitly so the existing setup sources keep compiling. -->
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.IO" />
+    <Using Include="System.Net.Http" />
+    <Using Include="System.Linq" />
+    <Using Include="System.Threading" />
+    <Using Include="System.Threading.Tasks" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LanDisk.Core\LanDisk.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(LanDiskPayloadZip)' != '' and Exists('$(LanDiskPayloadZip)')">
+    <!--
+      The verified release payload. It travels inside the executable so that the user never has to
+      keep a folder of 300+ files together with the installer, and it is the same file the release
+      ZIP contains, so what gets installed is exactly what was tested.
+    -->
+    <EmbeddedResource Include="$(LanDiskPayloadZip)">
+      <LogicalName>LanDisk.Payload.zip</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

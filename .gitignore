@@ -1,0 +1,32 @@
+# 构建产物
+bin/
+obj/
+dist/
+.testrun/
+.releasecheck/
+.rcverify/
+.smoke/
+TestResults/
+# 任务 08 的自查现场：隔离数据目录里真实跑一次外壳（.runtimecheck）与渲染界面证据（.uicheck）。
+# 两者都含运行期生成的证书与数据目录内容，只是本机自查用的临时现场。
+.runtimecheck/
+.uicheck/
+
+# 前端依赖与构建输出
+node_modules/
+src/LanDisk.Server/wwwroot/
+
+# 工具与编辑器
+.vs/
+.idea/
+*.user
+*.suo
+
+# 本地临时文件
+*.log
+*.tmp
+.setupcheck/
+# TypeScript 增量编译缓存：构建产物，不能进版本库。
+# 它每次 tsc -b 都会重写，被 tracked 会让工作树在每次构建后变脏，
+# 从而让'工作树必须干净'的候选身份门禁在干净构建上误报失败。
+*.tsbuildinfo

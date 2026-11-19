@@ -1,0 +1,63 @@
+<Project>
+
+  <!--
+    Build identity.
+
+    The release commit is injected from the outside (`-p:LanDiskBuildCommit=<sha>`) instead of being
+    discovered by the compiler, so a build either carries an exact, known commit or carries none at
+    all. Every project in the repository stamps the same value, which means the running product, the
+    update package and the delivery report can all be checked against one another.
+
+    When the property is not supplied the attribute is simply absent and the product reports an empty
+    commit: a development build must never claim to be a candidate.
+  -->
+  <PropertyGroup>
+    <LanDiskBuildCommit Condition="'$(LanDiskBuildCommit)' == ''"></LanDiskBuildCommit>
+    <LanDiskBuildId Condition="'$(LanDiskBuildId)' == ''"></LanDiskBuildId>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(LanDiskBuildCommit)' != ''">
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>LanDiskBuildCommit</_Parameter1>
+      <_Parameter2>$(LanDiskBuildCommit)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <!--
+    The product version comes from each project's own $(Version), so it cannot drift from the
+    assembly version the way a hand-written constant would. LanDisk.Core is the assembly
+    BuildIdentity reads, and it is a library: without this it would report its own library version
+    rather than the product's.
+  -->
+  <PropertyGroup>
+    <LanDiskProductVersion Condition="'$(LanDiskProductVersion)' == ''">$(Version)</LanDiskProductVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(LanDiskProductVersion)' != ''">
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>LanDiskProductVersion</_Parameter1>
+      <_Parameter2>$(LanDiskProductVersion)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(LanDiskBuildId)' != ''">
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>LanDiskBuildId</_Parameter1>
+      <_Parameter2>$(LanDiskBuildId)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <!--
+    The digest of the release payload embedded in LanDisk-Setup.exe. The installer refuses to write
+    anything when the archive it carries does not hash to this value, which is what turns "the
+    installer ships the tested build" from a claim into a check the installer performs on itself.
+    Absent in a development build, in which case the installer says so instead of pretending.
+  -->
+  <ItemGroup Condition="'$(LanDiskPayloadSha256)' != ''">
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>LanDiskPayloadSha256</_Parameter1>
+      <_Parameter2>$(LanDiskPayloadSha256)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>LanDisk.Updater</RootNamespace>
+    <AssemblyName>LanDisk.Updater</AssemblyName>
+    <Version>1.8.1</Version>
+    <UseWindowsForms>false</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- Single file so that "copy the updater somewhere safe before replacing the product" is one
+         file copy, and self contained so it still runs when the installation it is repairing is
+         broken. -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LanDisk.Core\LanDisk.Core.csproj" />
+    <ProjectReference Include="..\LanDisk.Update\LanDisk.Update.csproj" />
+  </ItemGroup>
+
+</Project>

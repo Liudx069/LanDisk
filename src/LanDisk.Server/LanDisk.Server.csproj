@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>LanDisk.Server</RootNamespace>
+    <AssemblyName>LanDisk.Server</AssemblyName>
+    <Version>1.8.1</Version>
+    <RuntimeIdentifier Condition="'$(LanDiskPublishRid)' != ''">$(LanDiskPublishRid)</RuntimeIdentifier>
+    <PublishSingleFile>false</PublishSingleFile>
+    <SelfContained Condition="'$(LanDiskSelfContained)' != ''">$(LanDiskSelfContained)</SelfContained>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LanDisk.Core\LanDisk.Core.csproj" />
+    <ProjectReference Include="..\LanDisk.Update\LanDisk.Update.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Built frontend assets are copied in from src/LanDisk.Web/dist by tools/Build-Web.ps1 -->
+    <Content Update="wwwroot\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

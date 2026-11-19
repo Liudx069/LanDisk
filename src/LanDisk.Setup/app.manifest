@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <assemblyIdentity version="1.0.0.0" name="LanDisk-Setup" />
+
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          The installer itself runs as the signed in user: it writes program files under
+          %LOCALAPPDATA%, creates per-user shortcuts and registers a per-user uninstall entry, none of
+          which needs administrator rights. The single UAC prompt a normal install produces comes from
+          re-launching this same executable in its elevated-firewall-add mode, a mode that can do
+          exactly two fixed things. Declaring requireAdministrator here would instead give the whole
+          installer elevated rights for its entire lifetime, which is a much larger surface than the
+          one problem that actually needs it.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" /><!-- Windows 10 / 11 -->
+    </application>
+  </compatibility>
+
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <!--
+        DPI awareness is declared through the project's ApplicationHighDpiMode (PerMonitorV2) rather than
+        here: WinForms warns when both are present, and the property is the supported way to set it. The
+        console's AutoScaleMode is Dpi, so the node strip and the text scale with the monitor.
+      -->
+      <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
+    </windowsSettings>
+  </application>
+</assembly>

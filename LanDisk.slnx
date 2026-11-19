@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/LanDisk.Core/LanDisk.Core.csproj" />
+    <Project Path="src/LanDisk.Update/LanDisk.Update.csproj" />
+    <Project Path="src/LanDisk.Server/LanDisk.Server.csproj" />
+    <Project Path="src/LanDisk.App/LanDisk.App.csproj" />
+    <Project Path="src/LanDisk.Setup/LanDisk.Setup.csproj" />
+    <Project Path="src/LanDisk.Updater/LanDisk.Updater.csproj" />
+    <Project Path="src/LanDisk.ExtensionHost/LanDisk.ExtensionHost.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LanDisk.Tests/LanDisk.Tests.csproj" />
+    <Project Path="tests/ExtensionTestHelper/ExtensionTestHelper.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/keytool/KeyTool.csproj" />
+    <Project Path="tools/logogen/LogoGen.csproj" />
+  </Folder>
+</Solution>

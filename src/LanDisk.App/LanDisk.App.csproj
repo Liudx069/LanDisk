@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <!-- Native WPF: the management surface is drawn by the same framework Windows draws its own
+         shell with. Not a WebView, not a WebView2 host. WinForms is deliberately not enabled either —
+         the folder picker is Microsoft.Win32.OpenFolderDialog, which is the Windows dialog itself. -->
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>false</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>LanDisk.App</RootNamespace>
+    <!-- The user facing entry point is still LanDisk.exe: double clickable, no console window. Setup,
+         the firewall rule, the shortcuts and the autostart entry all key off this exact name, so the
+         WinForms to WPF conversion must not change it. -->
+    <AssemblyName>LanDisk</AssemblyName>
+    <Version>1.8.1</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Pinned version, MIT licence, no dynamic loading of anything. See THIRD_PARTY_NOTICES.md. -->
+    <PackageReference Include="WPF-UI" Version="4.3.0" />
+    <!-- The tray icon lives in its own package in the 4.x line. Same author, same MIT licence. -->
+    <PackageReference Include="WPF-UI.Tray" Version="4.3.0" />
+    <!-- Pinned: MIT, small, and used for exactly one thing — drawing the pairing QR code locally. -->
+    <PackageReference Include="QRCoder" Version="1.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LanDisk.Server\LanDisk.Server.csproj" />
+    <ProjectReference Include="..\LanDisk.Update\LanDisk.Update.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The shell ships the same web assets as the server so that "LanDisk.exe alone" is a complete
+         product. The native UI does not use them in normal operation; they exist for the Advanced →
+         Web management recovery page, and because the in-process server serves them. -->
+    <Content Include="..\LanDisk.Server\wwwroot\**\*"
+             Link="wwwroot\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
