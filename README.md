@@ -15,6 +15,22 @@ LanDisk 让 iPhone（或任何同一局域网内的浏览器）通过网页访�
 历经 1.0（六项核心功能）→ 1.1（文件管理器体验与免令牌登录）→ 1.2（桌面应用与签名更新）→
 1.4（安装器与首次运行向导）→ 1.7（界面系统、动态权限、在线状态、主题）→ 1.8（真机修复与 WiFi 移除）。
 
+## 界面
+
+> 截图取自 1.8.x 桌面端，1366×768、深色主题（浅色与 100%–200% 缩放同样支持）。
+
+| 概览 | 连接 iPhone |
+|---|---|
+| ![概览](docs/screenshots/overview.png) | ![连接 iPhone](docs/screenshots/iphone.png) |
+
+| 文件与共享 | 设备 |
+|---|---|
+| ![文件与共享](docs/screenshots/files-shares.png) | ![设备](docs/screenshots/devices.png) |
+
+| 网络 |
+|---|
+| ![网络](docs/screenshots/network.png) |
+
 ## 一分钟上手
 
 1. 解压 `LanDisk-win-x64.zip` 到任意目录（例如 `D:\LanDisk`），或直接运行 `LanDisk-Setup.exe` 安装。
